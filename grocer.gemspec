@@ -2,8 +2,8 @@
 require File.expand_path('../lib/grocer/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ['Andy Lindeman', 'Steven Harman', 'Patrick Van Stee']
-  gem.email         = ['alindeman@gmail.com', 'steveharman@gmail.com', 'patrickvanstee@gmail.com']
+  gem.authors       = ['Andy Lindeman', 'Steven Harman', 'Patrick Van Stee', 'Glenn Turner']
+  gem.email         = ['alindeman@gmail.com', 'steveharman@gmail.com', 'patrickvanstee@gmail.com', 'glenn@standalone.com']
   gem.summary       = %q{Pushing Apple notifications since 2012.}
   gem.description   = <<-DESC
                           Grocer interfaces with the Apple Push
@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  gem.name          = "grocer"
+  gem.name          = "grocer-sai"
   gem.require_paths = ["lib"]
   gem.version       = Grocer::VERSION
 
