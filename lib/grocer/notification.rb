@@ -5,9 +5,10 @@ module Grocer
   class Notification
     MAX_PAYLOAD_SIZE = 2048
     CONTENT_AVAILABLE_INDICATOR = 1
+    DEFAULT_PRIORITY = 5
 
     attr_accessor :identifier, :expiry, :device_token
-    attr_reader :alert, :badge, :custom, :sound, :content_available, :category
+    attr_reader :alert, :badge, :custom, :sound, :content_available, :priority, :category
 
     # Public: Initialize a new Grocer::Notification. You must specify at least an `alert` or `badge`.
     #
@@ -18,6 +19,7 @@ module Grocer
     #           :sound             - The String representing the sound portion of the payload. (optional)
     #           :expiry            - The Integer representing UNIX epoch date sent to APNS as the notification expiry. (default: 0)
     #           :identifier        - The arbitrary Integer sent to APNS to uniquely this notification. (default: 0)
+    #           :priority					 - The priority level for the message. (default: 5)
     #           :content_available - The truthy or falsy value indicating the availability of new content for background fetch. (optional)
     #           :category          - The String to be sent as the category portion of the payload. (optional)
     def initialize(payload = {})
@@ -66,6 +68,11 @@ module Grocer
       @category = category
       @encoded_payload = nil
     end
+    
+    def priority=(priority)
+      @priority = priority
+      @encoded_payload = nil
+    end
 
     def content_available=(content_available)
       @content_available = CONTENT_AVAILABLE_INDICATOR if content_available
@@ -97,6 +104,7 @@ module Grocer
       aps_hash[:alert] = alert if alert
       aps_hash[:badge] = badge if badge
       aps_hash[:sound] = sound if sound
+      aps_hash[:priority] = priority if priority
       aps_hash[:'content-available'] = content_available if content_available?
       aps_hash[:category] = category if category
 
