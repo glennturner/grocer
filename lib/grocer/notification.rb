@@ -53,7 +53,7 @@ module Grocer
       bytes = [
         2,
         item_frames_length
-      ].concat( items ).pack('CNNnH64nA*')
+      ].pack('CNNnH64nA*')
       
       p "ITEM FRAMES LENGTH: #{ item_frames_length }"
       bytes      
