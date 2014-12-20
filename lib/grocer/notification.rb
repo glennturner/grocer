@@ -30,7 +30,7 @@ module Grocer
       end
     end
 
-    def to_bytes_legacy
+    def to_bytes
       validate_payload
 
       [
@@ -44,7 +44,7 @@ module Grocer
       ].pack('CNNnH64nA*')
     end
     
-		def to_bytes
+		def to_bytes_future
       validate_payload
 
       bytes = [
@@ -74,7 +74,7 @@ module Grocer
 			  5,
 			  priority_length,
 			  sanitized_priority
-      ].join( '' )
+      ].merge(custom || { })
 		end
 
     def alert=(alert)
