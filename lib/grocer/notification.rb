@@ -46,12 +46,12 @@ module Grocer
     
 		def to_bytes
       validate_payload
+      items = item_frames
 
       bytes = [
         2,
-        item_frames.bytesize,
-        item_frames
-      ].pack('CNNnH64nA*')
+        item_frames.join( '' ).bytesize
+      ].merge( items ).pack('CNNnH64nA*')
       
       p bytes.inspect
       bytes      
@@ -59,22 +59,22 @@ module Grocer
 
 		def item_frames
 			[
-				1,
+				'1',
         device_token_length,
         sanitized_device_token,
-        2,
+        '2',
         encoded_payload.bytesize,
         encoded_payload,
-        3,
+        '3',
         identifier_length,
         identifier,
-        4,
+        '4',
 				expiry_epoch_time_length,
 			  expiry_epoch_time,
-			  5,
+			  '5',
 			  priority_length,
 			  sanitized_priority
-      ].join( '' )
+      ]
 		end
 
     def alert=(alert)
