@@ -49,7 +49,7 @@ module Grocer
 
       bytes = [
         2,
-        item_frames.bytesize
+        item_frames.bytesize,
         item_frames
       ].pack('CNNnH64nA*')
       
@@ -64,7 +64,7 @@ module Grocer
         sanitized_device_token,
         2,
         encoded_payload.bytesize,
-        encoded_payload
+        encoded_payload,
         3,
         identifier_length,
         identifier,
