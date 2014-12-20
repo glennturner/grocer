@@ -50,30 +50,41 @@ module Grocer
 
       bytes = [
         2,
-        item_frames.join( '' ).bytesize
+        item_frames_length
       ].concat( items ).pack('CNNnH64nA*')
       
+      p "ITEM FRAMES LENGTH: #{ item_frames_length }"
       p bytes.inspect
       bytes      
 		end
+		
+		def item_frames_length
+			item_frames_length = 0
+			
+			@frames.each { | ele |
+				item_frames_length += ele.bytesize
+			}
+			
+			item_frames_length
+		end
 
 		def item_frames
-			[
-				'1',
-        device_token_length.to_s,
+			@frames = [
+				1,
+        device_token_length,
         sanitized_device_token,
-        '2',
-        encoded_payload.bytesize.to_s,
+        2,
+        encoded_payload.bytesize,
         encoded_payload,
-        '3',
-        identifier_length.to_s,
-        identifier.to_s,
-        '4',
-				expiry_epoch_time_length.to_s,
-			  expiry_epoch_time.to_s,
-			  '5',
-			  priority_length.to_s,
-			  sanitized_priority.to_s
+        3,
+        identifier_length,
+        identifier,
+        4,
+				expiry_epoch_time_length,
+			  expiry_epoch_time,
+			  5,
+			  priority_length,
+			  sanitized_priority
       ]
 		end
 
