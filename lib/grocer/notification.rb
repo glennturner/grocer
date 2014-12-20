@@ -62,7 +62,7 @@ module Grocer
 			item_frames_length = 0
 			
 			@frames.each { | ele |
-				item_frames_length += ele.bytesize
+				item_frames_length += ele.to_s.bytesize
 			}
 			
 			item_frames_length
