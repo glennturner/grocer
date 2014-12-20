@@ -5,7 +5,7 @@ module Grocer
   class Notification
     MAX_PAYLOAD_SIZE = 2048
     CONTENT_AVAILABLE_INDICATOR = 1
-    DEFAULT_PRIORITY = 5
+    DEFAULT_PRIORITY = 10
 
     attr_accessor :identifier, :expiry, :device_token
     attr_reader :alert, :badge, :custom, :sound, :content_available, :priority, :category
@@ -19,7 +19,7 @@ module Grocer
     #           :sound             - The String representing the sound portion of the payload. (optional)
     #           :expiry            - The Integer representing UNIX epoch date sent to APNS as the notification expiry. (default: 0)
     #           :identifier        - The arbitrary Integer sent to APNS to uniquely this notification. (default: 0)
-    #           :priority					 - The priority level for the message. (default: 5)
+    #           :priority					 - The priority level for the message. (default: 10)
     #           :content_available - The truthy or falsy value indicating the availability of new content for background fetch. (optional)
     #           :category          - The String to be sent as the category portion of the payload. (optional)
     def initialize(payload = {})
@@ -30,7 +30,7 @@ module Grocer
       end
     end
 
-    def to_bytes
+    def to_bytes_legacy
       validate_payload
 
       [
@@ -43,6 +43,36 @@ module Grocer
         encoded_payload
       ].pack('CNNnH64nA*')
     end
+    
+		def to_bytes
+      validate_payload
+
+      bytes = [
+        1,
+        item_frames.bytesize
+        item_frames
+      ].pack('CNNnH64nA*')
+		end
+
+		def item_frames
+			[
+				1,
+        device_token_length,
+        sanitized_device_token,
+        2,
+        encoded_payload.bytesize,
+        encoded_payload
+        3,
+        identifier_length,
+        identifier,
+        4,
+				expiry_epoch_time_length,
+			  expiry_epoch_time,
+			  5,
+			  priority_length,
+			  sanitized_priority
+      ].join( '' )
+		end
 
     def alert=(alert)
       @alert = alert
@@ -70,7 +100,7 @@ module Grocer
     end
     
     def priority=(priority)
-      @priority = priority
+      @priority = priority ? priority : DEFAULT_PRIORITY
       @encoded_payload = nil
     end
 
@@ -104,7 +134,6 @@ module Grocer
       aps_hash[:alert] = alert if alert
       aps_hash[:badge] = badge if badge
       aps_hash[:sound] = sound if sound
-      aps_hash[:priority] = priority if priority
       aps_hash[:'content-available'] = content_available if content_available?
       aps_hash[:category] = category if category
 
@@ -122,9 +151,25 @@ module Grocer
     def sanitized_device_token
       device_token.tr(' ', '') if device_token
     end
+    
+    def sanitized_priority
+    	@priority == 10 ? @priority : DEFAULT_PRIORITY
+    end
 
     def device_token_length
       32
     end
+
+		def expiry_epoch_time_length
+			4
+		end
+
+		def identifier_length
+			4
+		end
+
+		def priority_length
+			1
+		end
   end
 end
