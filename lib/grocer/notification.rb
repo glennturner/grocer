@@ -48,10 +48,13 @@ module Grocer
       validate_payload
 
       bytes = [
-        1,
+        2,
         item_frames.bytesize
         item_frames
       ].pack('CNNnH64nA*')
+      
+      p bytes.inspect
+      bytes      
 		end
 
 		def item_frames
