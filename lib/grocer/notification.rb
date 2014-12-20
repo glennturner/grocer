@@ -51,7 +51,7 @@ module Grocer
       bytes = [
         2,
         item_frames.join( '' ).bytesize
-      ].merge( items ).pack('CNNnH64nA*')
+      ].concat( items ).pack('CNNnH64nA*')
       
       p bytes.inspect
       bytes      
