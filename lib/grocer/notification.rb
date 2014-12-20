@@ -67,13 +67,13 @@ module Grocer
         encoded_payload,
         '3',
         identifier_length.to_s,
-        identifier,
+        identifier.to_s,
         '4',
 				expiry_epoch_time_length.to_s,
-			  expiry_epoch_time,
+			  expiry_epoch_time.to_s,
 			  '5',
 			  priority_length.to_s,
-			  sanitized_priority
+			  sanitized_priority.to_s
       ]
 		end
 
