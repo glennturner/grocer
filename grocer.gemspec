@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
                           but Grocer plans to be the cleanest, most
                           extensible, and friendliest.
                       DESC
-  gem.homepage      = 'https://github.com/grocer/grocer'
+  gem.homepage      = 'https://github.com/glennturner/grocer'
   gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split("\n")
