@@ -30,7 +30,7 @@ module Grocer
       end
     end
 
-    def to_bytes
+    def to_bytes_legacy
       validate_payload
 
       [
@@ -44,7 +44,7 @@ module Grocer
       ].pack('CNNnH64nA*')
     end
     
-		def to_bytes_future
+		def to_bytes
       validate_payload
 
       bytes = [
