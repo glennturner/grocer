@@ -56,7 +56,6 @@ module Grocer
       ].concat( items ).pack('CNNnH64nA*')
       
       p "ITEM FRAMES LENGTH: #{ item_frames_length }"
-      p bytes.inspect
       bytes      
 		end
 		
