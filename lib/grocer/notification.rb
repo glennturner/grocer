@@ -74,7 +74,7 @@ module Grocer
 			  5,
 			  priority_length,
 			  sanitized_priority
-      ].merge(custom || { })
+      ].join( '' )
 		end
 
     def alert=(alert)
