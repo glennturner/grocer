@@ -47,7 +47,8 @@ module Grocer
 		def to_bytes
       validate_payload
       items = item_frames
-
+      p "ITEMS: #{ items.inspect }"
+			
       bytes = [
         2,
         item_frames_length
