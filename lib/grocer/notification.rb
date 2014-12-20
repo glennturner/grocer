@@ -60,19 +60,19 @@ module Grocer
 		def item_frames
 			[
 				'1',
-        device_token_length,
+        device_token_length.to_s,
         sanitized_device_token,
         '2',
-        encoded_payload.bytesize,
+        encoded_payload.bytesize.to_s,
         encoded_payload,
         '3',
-        identifier_length,
+        identifier_length.to_s,
         identifier,
         '4',
-				expiry_epoch_time_length,
+				expiry_epoch_time_length.to_s,
 			  expiry_epoch_time,
 			  '5',
-			  priority_length,
+			  priority_length.to_s,
 			  sanitized_priority
       ]
 		end
