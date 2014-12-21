@@ -85,7 +85,7 @@ module Grocer
       ]
             
       p "FRAMES: #{ @frames.inspect }"
-      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnC' )
+      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnn' )
 		end
 
     def alert=(alert)
