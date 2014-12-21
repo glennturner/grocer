@@ -34,7 +34,7 @@ module Grocer
       validate_payload
 
       [
-        1,
+        1, 
         identifier,
         expiry_epoch_time,
         device_token_length,
@@ -51,33 +51,29 @@ module Grocer
       p "ITEMS FRAME LENGTH: #{ item_frames_length }"
 			
       bytes = [
-        '2',
-        item_frames_length.to_s
-      ].concat( items ).pack('CNNnH64nA*')
+        2,
+        item_frames_length
+      ].pack('CN')
+      bytes += item_frames
       
+      p "BYTES: #{ bytes }"
       p "ITEM FRAMES LENGTH: #{ item_frames_length }"
       bytes      
 		end
 		
-		def item_frames_length
-			item_frames_length = 0
-			
-			@frames.each { | ele |
-				item_frames_length += ele.to_s.bytesize
-			}
-			
-			item_frames_length
+		def item_frames_length			
+			@frames.bytesize
 		end
 
 		def item_frames
 			@frames = [
-				1,
-        device_token_length,
-        sanitized_device_token,
+				1, 
+        device_token_length, 
+        sanitized_device_token, 
         2,
         encoded_payload.bytesize,
         encoded_payload,
-        3,
+        3, # C
         identifier_length,
         identifier,
         4,
@@ -86,7 +82,7 @@ module Grocer
 			  5,
 			  priority_length,
 			  sanitized_priority
-      ]
+      ].pack( 'CnH64CnA*CnNCnNCnC' )
 		end
 
     def alert=(alert)
