@@ -83,7 +83,7 @@ module Grocer
 			  priority_length,
 			  sanitized_priority
       ]
-      
+            
       p "FRAMES: #{ @frames.inspect }"
       @frames.pack( 'CnH64CnA*CnNCnNCnC' )
 		end
@@ -114,7 +114,7 @@ module Grocer
     end
     
     def priority=(priority)
-      @priority = DEFAULT_PRIORITY unless priority
+      @priority = DEFAULT_PRIORITY ? priority : DEFAULT_PRIORITY
       @encoded_payload = nil
     end
 
