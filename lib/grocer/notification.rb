@@ -46,9 +46,6 @@ module Grocer
     
 		def to_bytes
       validate_payload
-      items = item_frames
-      p "ITEMS: #{ items.inspect } - LEN:"
-      p "ITEMS FRAME LENGTH: #{ item_frames_length }"
 			
       bytes = [
         2,
@@ -56,8 +53,6 @@ module Grocer
       ].pack('CN')
       bytes += item_frames
       
-      p "BYTES: #{ bytes }"
-      p "ITEM FRAMES LENGTH: #{ item_frames_length }"
       bytes      
 		end
 		
@@ -81,12 +76,8 @@ module Grocer
 			  expiry_epoch_time,
 			  5,
 			  priority_length,
-			  10,
-			  1
-      ]
-            
-      p "FRAMES: #{ @frames.inspect }"
-      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnnn' )
+			  sanitized_priority
+      ].pack( 'CnH64CnA*CnNCnNCnC' )
 		end
 
     def alert=(alert)
