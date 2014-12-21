@@ -82,11 +82,11 @@ module Grocer
 			  5,
 			  priority_length,
 			  10,
-			  ''
+			  1
       ]
             
       p "FRAMES: #{ @frames.inspect }"
-      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnn' )
+      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnnn' )
 		end
 
     def alert=(alert)
