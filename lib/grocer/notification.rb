@@ -68,7 +68,7 @@ module Grocer
         2,
         encoded_payload.bytesize,
         encoded_payload,
-        3, # C
+        3,
         identifier_length,
         identifier,
         4,
