@@ -57,7 +57,7 @@ module Grocer
 		end
 		
 		def item_frames_length			
-			@frames.bytesize
+			item_frames.bytesize
 		end
 
 		def item_frames
