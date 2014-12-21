@@ -81,11 +81,11 @@ module Grocer
 			  expiry_epoch_time,
 			  5,
 			  priority_length,
-			  sanitized_priority
+			  10
       ]
             
       p "FRAMES: #{ @frames.inspect }"
-      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnN' )
+      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnn' )
 		end
 
     def alert=(alert)
