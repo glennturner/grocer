@@ -77,6 +77,7 @@ notification = Grocer::Notification.new(
   sound:             "siren.aiff",         # optional
   expiry:            Time.now + 60*60,     # optional; 0 is default, meaning the message is not stored
   identifier:        1234,                 # optional; must be an integer
+  priority:					 5										 # optional; 10 is default, meaning the message will be sent immediate. Set to 5 to send when it's best for the device's battery.
   content_available: true                  # optional; any truthy value will set 'content-available' to 1
 )
 
