@@ -57,7 +57,7 @@ module Grocer
 		end
 		
 		def item_frames_length			
-			item_frames.bytesize
+			@frames.bytesize
 		end
 
 		def item_frames
@@ -76,8 +76,10 @@ module Grocer
 			  expiry_epoch_time,
 			  5,
 			  priority_length,
-			  sanitized_priority
-      ].pack( 'CnH64CnA*CnNCnNCnC' )
+			  10
+      ]
+            
+      @frames = @frames.pack( 'CnH64CnA*CnNCnNCnC' )
 		end
 
     def alert=(alert)
